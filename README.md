@@ -1,1 +1,3 @@
-# react-harry-potter-api
+# react-harry-potter-api 🦅🦉📔
+
+   🧹🐍        
