@@ -1,7 +1,8 @@
 import { HiOutlineEye } from "react-icons/hi2";
 import { SlUser } from "react-icons/sl";
 import { GiGraveFlowers } from "react-icons/gi";
-// import { PiHouseLineBold } from "react-icons/pi";
+import { PiHouseLineBold } from "react-icons/pi";
+
 function CharacterList() {
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-5">
@@ -32,10 +33,10 @@ function Character() {
           {/* <LiaHeartbeatSolid /> */}
           <h3>Dead - Human</h3>
         </span>
-        {/* <span className="flex space-x-4">
+        <span className="flex space-x-4">
           <PiHouseLineBold size={18} />
           <h3>Gryffindor</h3>
-        </span> */}
+        </span>
       </div>
       <div className="row-span-2 col-span-2 flex items-center">
         <HiOutlineEye className="cursor-pointer" size={25} />
