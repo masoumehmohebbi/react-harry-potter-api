@@ -13,7 +13,7 @@ function CharacterList() {
   const { query } = useQuery();
   const { allData } = useFetch(query);
   const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 5;
+  const recordsPerPage = 9;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = allData.slice(firstIndex, lastIndex);
@@ -42,13 +42,14 @@ function CharacterList() {
           </>
         )}
       </section>
-
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        npage={npage}
-        numbers={numbers}
-      />
+      {records.length && (
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          npage={npage}
+          numbers={numbers}
+        />
+      )}
     </>
   );
 }
@@ -101,11 +102,9 @@ function Character({ data }) {
 
 function Spells({ item }) {
   return (
-    <div className="grid bg-[#F3DEBA] shadow-lg rounded-md p-1">
-      <div className="flex flex-col space-y-3">
-        <h1>{item.name}</h1>
-        <p>{item.description}</p>
-      </div>
+    <div className="bg-[#F3DEBA] shadow-lg rounded-md p-1 flex flex-col space-y-3">
+      <h1>{item.name}</h1>
+      <p>{item.description}</p>
     </div>
   );
 }
