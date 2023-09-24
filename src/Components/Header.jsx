@@ -1,6 +1,7 @@
 import { BiHeart, BiSearch } from "react-icons/bi";
 import Select from "react-select";
 import { useQuery } from "../context/QueryContext";
+import useFetch from "../hooks/useFetch";
 
 const options = [
   { value: "characters", label: "Characters" },
@@ -37,17 +38,8 @@ const selectStyles = {
 };
 
 function Header() {
-  // const [query, setQuery] = useState("");
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { data } = await axios.get(
-  //       `https://hp-api.onrender.com/api/${query}`
-  //     );
-  //     console.log(data);
-  //   };
-  //   fetchData();
-  // }, [query]);
+  const { query } = useQuery();
+  const { allData } = useFetch(query);
   return (
     <div className="flex flex-col justify-center relative bg-[url('./assets/images/header.jpg')] h-52 bg-top">
       <div className="flex flex-col items-center">
@@ -58,7 +50,7 @@ function Header() {
       </div>
       {/* Found result */}
       <div className="absolute left-0 top-1 pr-5 text-white">
-        <p>Found X Result</p>
+        <p>Found {allData.length} Result</p>
       </div>
       <Favourites />
     </div>
@@ -78,7 +70,7 @@ function Search() {
         className="col-span-2 mr-[1px]"
         options={options}
         styles={selectStyles}
-        placeholder="Select a category..."
+        placeholder="Category..."
         onChange={(e) => handleSelect(e)}
       />
       <div className="col-span-5 w-full flex items-center justify-center relative">
@@ -89,13 +81,12 @@ function Search() {
   );
 }
 function Favourites() {
-  const { query } = useQuery();
   return (
     <div className="absolute right-0 top-1 pr-5">
       <button className="relative">
         <BiHeart size={39} className="text-red-500" />
         <span className="absolute top-0 -right-[6px] h-6 w-6 text-sm rounded-full bg-red-500 flex justify-center items-center">
-          {query.lenght}
+          0
         </span>
       </button>
     </div>
