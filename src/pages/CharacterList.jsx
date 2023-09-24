@@ -2,6 +2,7 @@ import { HiOutlineEye } from "react-icons/hi2";
 import { SlUser, SlUserFemale } from "react-icons/sl";
 import { TbGrave2 } from "react-icons/tb";
 import { LiaHeartbeatSolid } from "react-icons/lia";
+import { GiMagicPortal } from "react-icons/gi";
 import { PiHouseLineBold } from "react-icons/pi";
 import useFetch from "../hooks/useFetch";
 import { useQuery } from "../context/QueryContext";
@@ -42,6 +43,7 @@ function CharacterList() {
           </>
         )}
       </section>
+
       {records.length && (
         <Pagination
           currentPage={currentPage}
@@ -102,8 +104,11 @@ function Character({ data }) {
 
 function Spells({ item }) {
   return (
-    <div className="bg-[#F3DEBA] shadow-lg rounded-md p-1 flex flex-col space-y-3">
-      <h1>{item.name}</h1>
+    <div className="bg-[#F3DEBA] w-80 shadow-lg rounded-md p-2 flex flex-col">
+      <h1 className="flex items-center font-bold mb-3">
+        <GiMagicPortal className="text-purple-700 mr-1" /> {item.name}
+      </h1>
+      <span className="font-semibold">Description:</span>
       <p>{item.description}</p>
     </div>
   );
