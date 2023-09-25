@@ -9,7 +9,7 @@ import { useQuery } from "../context/QueryContext";
 import Loader from "../Components/Loader";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../Components/Header";
+import Header, { NumOfresult, Search } from "../Components/Header";
 
 function CharacterList() {
   // Pagination Config
@@ -24,19 +24,12 @@ function CharacterList() {
   const numbers = [...Array(npage + 1).keys()].slice(1);
   // End Of Pagination Config
 
-  // if (!records.length) {
-  //   return (
-  //     <div className="flex flex-col mt-20 gap-y-9 items-center sticky top-0">
-  //       <Loader />
-  //       <h1 className="text-white text-2xl font-bold">
-  //         Select a Category ! ! !
-  //       </h1>
-  //     </div>
-  //   );
-  // }
   return (
     <>
-      <Header />
+      <Header>
+        <Search />
+        <NumOfresult allData={allData} />
+      </Header>
       {records.length ? (
         <>
           <section className="grid grid-cols-1 min-[600px]:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-5">
