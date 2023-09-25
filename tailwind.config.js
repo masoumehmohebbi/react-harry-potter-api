@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         harrypotter: ["Harry Potter", "sans-serif"],
+        gloria:["Gloria Hallelujah", "cursive"]
       },
     },
   },
