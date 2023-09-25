@@ -45,7 +45,7 @@ function Header() {
     <div className="flex flex-col justify-center relative bg-[url('./assets/images/header.jpg')] h-52 bg-top">
       <Toaster />
       <div className="flex flex-col items-center">
-        <h1 className="font-harrypotter text-4xl text-center text-white">
+        <h1 className="font-harrypotter text-2xl sm:text-3xl md:text-4xl text-center text-white">
           Welcome to Harry Potter Universe!
         </h1>
         <Search />
