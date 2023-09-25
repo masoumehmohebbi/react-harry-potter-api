@@ -1,7 +1,6 @@
 import { BiHeart, BiSearch } from "react-icons/bi";
 import Select from "react-select";
 import { useQuery } from "../context/QueryContext";
-// import useFetch from "../hooks/useFetch";
 import { Toaster } from "react-hot-toast";
 
 const options = [
@@ -39,8 +38,6 @@ const selectStyles = {
 };
 
 function Header({ children }) {
-  // const { query } = useQuery();
-  // const { allData } = useFetch(query);
   return (
     <div className="flex flex-col justify-center relative bg-[url('./assets/images/header.jpg')] h-52 bg-top">
       <Toaster />
@@ -48,11 +45,10 @@ function Header({ children }) {
         <h1 className="font-harrypotter text-2xl sm:text-3xl md:text-4xl text-center text-white">
           Welcome to Harry Potter Universe!
         </h1>
-        {/* <Search /> */}
         {children[0]}
       </div>
-      {/* Found result */}
-      {/* <NumOfResult /> */}
+
+      {/* NumOfResult */}
       <div className="absolute left-0 top-1 pt-1 pl-3 text-white">
         {children[1]}
       </div>
