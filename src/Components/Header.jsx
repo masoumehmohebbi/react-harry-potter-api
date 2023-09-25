@@ -1,7 +1,7 @@
 import { BiHeart, BiSearch } from "react-icons/bi";
 import Select from "react-select";
 import { useQuery } from "../context/QueryContext";
-import useFetch from "../hooks/useFetch";
+// import useFetch from "../hooks/useFetch";
 import { Toaster } from "react-hot-toast";
 
 const options = [
@@ -38,9 +38,9 @@ const selectStyles = {
   }),
 };
 
-function Header() {
-  const { query } = useQuery();
-  const { allData } = useFetch(query);
+function Header({ children }) {
+  // const { query } = useQuery();
+  // const { allData } = useFetch(query);
   return (
     <div className="flex flex-col justify-center relative bg-[url('./assets/images/header.jpg')] h-52 bg-top">
       <Toaster />
@@ -48,13 +48,13 @@ function Header() {
         <h1 className="font-harrypotter text-2xl sm:text-3xl md:text-4xl text-center text-white">
           Welcome to Harry Potter Universe!
         </h1>
-        <Search />
+        {/* <Search /> */}
+        {children[0]}
       </div>
       {/* Found result */}
+      {/* <NumOfResult /> */}
       <div className="absolute left-0 top-1 pt-1 pl-3 text-white">
-        <p className="text-center">
-          Found <span className="font-bold">{allData.length}</span> Result
-        </p>
+        {children[1]}
       </div>
       <Favourites />
     </div>
@@ -63,7 +63,7 @@ function Header() {
 
 export default Header;
 
-function Search() {
+export function Search() {
   const { setQuery } = useQuery();
   const handleSelect = (e) => {
     setQuery(e.value);
@@ -94,5 +94,12 @@ function Favourites() {
         </span>
       </button>
     </div>
+  );
+}
+export function NumOfresult({ allData }) {
+  return (
+    <p className="text-center">
+      Found <span className="font-bold">{allData.length}</span> Result
+    </p>
   );
 }
