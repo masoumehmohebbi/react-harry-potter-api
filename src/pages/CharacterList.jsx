@@ -34,7 +34,7 @@ function CharacterList() {
   }
   return (
     <>
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-5">
+      <section className="grid grid-cols-1 min-[600px]:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-5">
         {records.length && (
           <>
             {query !== "spells" &&
@@ -69,12 +69,12 @@ function Character({ data }) {
         alt=""
       />
 
-      <div className="row-span-2 col-span-4 flex gap-y-4 justify-center flex-col">
+      <div className="row-span-2 text-xs md:text-base col-span-5 flex gap-y-4 justify-center flex-col">
         <span className="flex space-x-4">
           {data.gender === "female" ? (
-            <SlUserFemale className="text-pink-600" size={18} />
+            <SlUserFemale className="text-pink-700 w-4 h-4 md:w-6 md:h-6" />
           ) : (
-            <SlUser className="text-blue-600" size={18} />
+            <SlUser className="text-blue-700 w-4 h-4 md:w-6 md:h-6" />
           )}
 
           <h2>{data.name}</h2>
@@ -82,9 +82,9 @@ function Character({ data }) {
         <span className="flex space-x-4 items-center">
           <>
             {data.alive ? (
-              <LiaHeartbeatSolid className="text-green-600" size={22} />
+              <LiaHeartbeatSolid className="text-green-600 w-5 h-5 md:w-7 md:h-7" />
             ) : (
-              <TbGrave2 size={22} />
+              <TbGrave2 className="text-[#92400e] w-5 h-5 md:w-7 md:h-7" />
             )}
           </>
 
@@ -93,12 +93,12 @@ function Character({ data }) {
           </h3>
         </span>
         <span className="flex space-x-4 items-center">
-          <PiHouseLineBold className="text-slate-700" size={18} />
+          <PiHouseLineBold className="text-[#eab308] w-5 h-5 md:w-6 md:h-6" />
           <h3>{data.house ? data.house : "—"}</h3>
         </span>
       </div>
-      <div className="row-span-2 col-span-2 flex items-center">
-        <HiOutlineEye className="cursor-pointer text-red-600" size={25} />
+      <div className="row-span-2 col-span-1 flex items-center pr-2">
+        <HiOutlineEye className="cursor-pointer text-red-600 w-5 h-5 md:w-6 md:h-6" />
       </div>
     </div>
   );
