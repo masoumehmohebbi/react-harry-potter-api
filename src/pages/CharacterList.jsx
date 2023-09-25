@@ -8,6 +8,8 @@ import useFetch from "../hooks/useFetch";
 import { useQuery } from "../context/QueryContext";
 import Loader from "../Components/Loader";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../Components/Header";
 
 function CharacterList() {
   // Pagination Config
@@ -22,37 +24,45 @@ function CharacterList() {
   const numbers = [...Array(npage + 1).keys()].slice(1);
   // End Of Pagination Config
 
-  if (!records.length) {
-    return (
-      <div className="flex flex-col mt-20 gap-y-9 items-center sticky top-0">
-        <Loader />
-        <h1 className="text-white text-2xl font-bold">
-          Select a Category ! ! !
-        </h1>
-      </div>
-    );
-  }
+  // if (!records.length) {
+  //   return (
+  //     <div className="flex flex-col mt-20 gap-y-9 items-center sticky top-0">
+  //       <Loader />
+  //       <h1 className="text-white text-2xl font-bold">
+  //         Select a Category ! ! !
+  //       </h1>
+  //     </div>
+  //   );
+  // }
   return (
     <>
-      <section className="grid grid-cols-1 min-[600px]:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-5">
-        {records.length && (
-          <>
+      <Header />
+      {records.length ? (
+        <>
+          <section className="grid grid-cols-1 min-[600px]:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-5">
             {query !== "spells" &&
-              records.map((data) => <Character key={data.id} data={data} />)}
+              records.map((data) => (
+                <Character key={data.id} data={data} id={data.id} />
+              ))}
 
             {query === "spells" &&
               records.map((data) => <Spells key={data.id} item={data} />)}
-          </>
-        )}
-      </section>
+          </section>
 
-      {records.length && (
-        <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          npage={npage}
-          numbers={numbers}
-        />
+          <Pagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            npage={npage}
+            numbers={numbers}
+          />
+        </>
+      ) : (
+        <div className="flex flex-col mt-20 gap-y-9 items-center sticky top-0">
+          <Loader />
+          <h1 className="text-white text-2xl font-bold">
+            Select a Category ! ! !
+          </h1>
+        </div>
       )}
     </>
   );
@@ -60,7 +70,8 @@ function CharacterList() {
 
 export default CharacterList;
 
-function Character({ data }) {
+function Character({ data, id }) {
+  const navigate = useNavigate();
   return (
     <div className="grid bg-[#F3DEBA] shadow-lg rounded-md p-1 grid-rows-2 grid-cols-8 justify-items-center">
       <img
@@ -98,7 +109,10 @@ function Character({ data }) {
         </span>
       </div>
       <div className="row-span-2 col-span-1 flex items-center pr-2">
-        <HiOutlineEye className="cursor-pointer text-red-600 w-5 h-5 md:w-6 md:h-6" />
+        <HiOutlineEye
+          onClick={() => navigate(`character/${id}`)}
+          className="cursor-pointer text-red-600 w-5 h-5 md:w-6 md:h-6"
+        />
       </div>
     </div>
   );
