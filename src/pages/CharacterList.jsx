@@ -22,11 +22,13 @@ function CharacterList() {
   const numbers = [...Array(npage + 1).keys()].slice(1);
   // End Of Pagination Config
 
-  if (!query) {
+  if (!records.length) {
     return (
       <div className="flex flex-col mt-20 gap-y-9 items-center sticky top-0">
         <Loader />
-        <h1 className="text-white text-2xl font-bold">Select a Category!</h1>
+        <h1 className="text-white text-2xl font-bold">
+          Select a Category ! ! !
+        </h1>
       </div>
     );
   }
@@ -139,9 +141,9 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
           </a>
         </li>
 
-        {numbers.length > 2 ? (
+        {numbers.length > 3 ? (
           <>
-            {numbers.slice(0, 2).map((number, index) => (
+            {numbers.slice(0, 1).map((number, index) => (
               <li
                 key={index}
                 className={` w-9 py-1 text-center border border-slate-700 rounded-md ${
