@@ -35,9 +35,9 @@ function CharacterDetails() {
   return (
     <div>
       <Header>
-        <span className="absolute flex justify-center bottom-2 px-3 py-1 rounded-2xl bg-fuchsia-300 items-center text-white">
+        <button className="absolute flex justify-center bottom-2 px-3 py-1 rounded-2xl bg-purple-300 items-center text-white">
           Add To Favourite
-        </span>
+        </button>
         <button
           onClick={() => navigate("/")}
           className="text-white flex items-center font-black"
