@@ -130,11 +130,12 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
     }
   };
   return (
-    <nav className=" flex w-full items-center justify-center mb-11">
-      <ul className="flex gap-x-4 rounded-md items-center border ">
-        <li className="border-r p-2">
-          <a href="#" onClick={prePage}>
-            Prev
+    <nav className=" flex w-full items-center justify-center mt-9 mb-11">
+      <ul className="flex gap-x-2 rounded-md items-center text-lg">
+        {/* Prev Bn */}
+        <li className="py-[3px] text-center border border-slate-700 text-slate-700 w-9 rounded-md">
+          <a href="#" onClick={prePage} className="text-xl">
+            &#x3c;
           </a>
         </li>
 
@@ -143,8 +144,10 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
             {numbers.slice(0, 2).map((number, index) => (
               <li
                 key={index}
-                className={`${
-                  currentPage === number ? "text-blue-600 font-bold" : ""
+                className={` w-9 py-1 text-center border border-slate-700 rounded-md ${
+                  currentPage === number
+                    ? "bg-slate-600 text-white"
+                    : "text-slate-700"
                 }`}
               >
                 <a href="#" onClick={() => changeCPage(number)}>
@@ -152,12 +155,16 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
                 </a>
               </li>
             ))}
-            <span>...</span>
+            <span className="w-9 py-1 text-center border border-slate-700 text-slate-700 font-bold rounded-md">
+              &#8943;
+            </span>
             {numbers.slice(-3).map((number, index) => (
               <li
                 key={index}
-                className={`${
-                  currentPage === number ? "text-blue-600 font-bold" : ""
+                className={`w-9 py-1 text-center border border-slate-700 rounded-md ${
+                  currentPage === number
+                    ? "bg-slate-600 text-white"
+                    : "text-slate-700 "
                 }`}
               >
                 <a href="#" onClick={() => changeCPage(number)}>
@@ -170,7 +177,11 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
           numbers.map((number, index) => (
             <li
               key={index}
-              className={`currentPage === number ? "text-red" : ""`}
+              className={`w-9 py-1 text-center border border-slate-700 rounded-md ${
+                currentPage === number
+                  ? "bg-slate-600 text-white"
+                  : "text-slate-700 "
+              }`}
             >
               <a href="#" onClick={() => changeCPage(number)}>
                 {number}
@@ -178,10 +189,10 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
             </li>
           ))
         )}
-
-        <li className="border-l p-2">
-          <a href="#" onClick={nextPage}>
-            Next
+        {/* Next Btn */}
+        <li className="py-[3px] text-center border border-slate-700 text-slate-700 w-9 rounded-md">
+          <a href="#" onClick={nextPage} className="text-xl">
+            &#x3e;
           </a>
         </li>
       </ul>
