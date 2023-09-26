@@ -6,7 +6,6 @@ export function FavouriteProvider({ children }) {
   const [Favourites, setFavourites] = useState(
     () => JSON.parse(localStorage.getItem("FAVOURITES")) || []
   );
-  // const [Favourites, setFavourites] = useState([]);
 
   return (
     <FavouriteContext.Provider value={{ Favourites, setFavourites }}>
