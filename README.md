@@ -9,4 +9,8 @@ This template provides a minimal setup to get React working in Vite with HMR and
 | ------------------ | ---------------------------------------------------------------- |
 | useState           | useQuery                                                       
 | useEffect          | useFetch
-| useContext         |
+| useParams          | useFavourite
+| useContext  
+| useNavigate
+
+
