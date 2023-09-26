@@ -16,8 +16,6 @@ export function PaginationProvider({ children }) {
   const npage = Math.ceil(allData.length / recordsPerPage);
   const numbers = [...Array(npage + 1).keys()].slice(1);
 
-  const [filteredTerm, setFilteredTerm] = useState("");
-
   return (
     <PaginationContext.Provider
       value={{
@@ -26,8 +24,6 @@ export function PaginationProvider({ children }) {
         setCurrentPage,
         npage,
         numbers,
-        filteredTerm,
-        setFilteredTerm,
       }}
     >
       {children}
