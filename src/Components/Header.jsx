@@ -2,10 +2,11 @@ import { BiHeart, BiSearch, BiTrashAlt } from "react-icons/bi";
 import Select from "react-select";
 import { useQuery } from "../context/QueryContext";
 import { Toaster } from "react-hot-toast";
-import { useState } from "react";
 import Modal from "./Modal";
 import { Character } from "../pages/CharacterList";
 import { useFavourite } from "../context/FavouritesContext";
+import useSetLocalStorage from "../hooks/useSetLocalStorage";
+import { useState } from "react";
 
 const options = [
   { value: "characters", label: "Characters" },
@@ -89,6 +90,9 @@ export function Favourite({ setIsAddToFavourite }) {
   const [isOpen, setIsOpen] = useState(false);
 
   const { Favourites, setFavourites } = useFavourite();
+
+  useSetLocalStorage("FAVOURITES", Favourites);
+
   const handleFavRemove = (id) => {
     const filteredFev = Favourites.filter((item) => item.id !== id);
     setFavourites(filteredFev);
