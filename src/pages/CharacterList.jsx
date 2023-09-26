@@ -16,7 +16,6 @@ import { useEffect, useState } from "react";
 
 function CharacterList() {
   const navigate = useNavigate();
-  // Pagination Config
   const { query } = useQuery();
   const { search } = useSearch();
   const { allData } = useFetch(query, search);
@@ -24,17 +23,17 @@ function CharacterList() {
   // Pagination Config
   const { records, currentPage, setCurrentPage, npage, numbers } =
     usePagination();
-  // End Of Pagination Config
-  const [newData, setNewData] = useState(records);
+
+  const [filteredChar, setFilteredChar] = useState(records);
 
   useEffect(() => {
     const filteredCharacters = records.filter((character) => {
       return character.name.toLowerCase().includes(search.toLowerCase());
     });
     if (filteredCharacters.length) {
-      setNewData(filteredCharacters);
+      setFilteredChar(filteredCharacters);
     } else {
-      setNewData(records);
+      setFilteredChar(records);
     }
   }, [search, records]);
   return (
@@ -44,11 +43,11 @@ function CharacterList() {
         <NumOfresult allData={allData} />
         <Favourite />
       </Header>
-      {newData.length ? (
+      {filteredChar.length ? (
         <>
           <section className="grid grid-cols-1 min-[600px]:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-5">
             {query !== "spells" &&
-              newData.map((data) => (
+              filteredChar.map((data) => (
                 <Character key={data.id} data={data}>
                   <HiOutlineEye
                     onClick={() => navigate(`character/${data.id}`)}
@@ -58,7 +57,7 @@ function CharacterList() {
               ))}
 
             {query === "spells" &&
-              newData.map((data) => <Spells key={data.id} item={data} />)}
+              filteredChar.map((data) => <Spells key={data.id} item={data} />)}
           </section>
 
           <Pagination
@@ -71,7 +70,7 @@ function CharacterList() {
       ) : (
         <div className="flex flex-col mt-20 gap-y-9 items-center sticky top-0">
           <Loader />
-          <h1 className="text-white text-2xl font-bold">
+          <h1 className="text-white text-xl sm:text-2xl font-bold">
             Select a Category ! ! !
           </h1>
         </div>
@@ -128,7 +127,7 @@ export function Character({ data, children }) {
 
 function Spells({ item }) {
   return (
-    <div className="bg-[#F3DEBA] w-80 shadow-lg rounded-md p-2 flex flex-col">
+    <div className="bg-[#F3DEBA] w-11/12 sm:w-80 shadow-lg rounded-md p-2 flex flex-col">
       <h1 className="flex items-center font-bold mb-3">
         <GiMagicPortal className="text-purple-700 mr-1" /> {item.name}
       </h1>
@@ -157,7 +156,7 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
     <nav className=" flex w-full items-center justify-center mt-9 mb-11">
       <ul className="flex gap-x-2 rounded-md items-center text-lg">
         {/* Prev Bn */}
-        <li className="py-[3px] text-center border border-slate-700 text-slate-700 w-9 rounded-md">
+        <li className="sm:py-[3px] text-center border border-slate-700 text-slate-700 w-7 sm:w-9 rounded-md">
           <a href="#" onClick={prePage} className="text-xl">
             &#x3c;
           </a>
@@ -168,7 +167,7 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
             {numbers.slice(0, 1).map((number, index) => (
               <li
                 key={index}
-                className={` w-9 py-1 text-center border border-slate-700 rounded-md ${
+                className={`w-7 sm:w-9 sm:py-1 text-center border border-slate-700 rounded-md ${
                   currentPage === number
                     ? "bg-slate-600 text-white"
                     : "text-slate-700"
@@ -179,13 +178,13 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
                 </a>
               </li>
             ))}
-            <span className="w-9 py-1 text-center border border-slate-700 text-slate-700 font-bold rounded-md">
+            <span className="w-7 sm:w-9 sm:py-1 text-center border border-slate-700 text-slate-700 font-bold rounded-md">
               &#8943;
             </span>
             {numbers.slice(-3).map((number, index) => (
               <li
                 key={index}
-                className={`w-9 py-1 text-center border border-slate-700 rounded-md ${
+                className={`w-7 sm:w-9 sm:py-1 text-center border border-slate-700 rounded-md ${
                   currentPage === number
                     ? "bg-slate-600 text-white"
                     : "text-slate-700 "
@@ -201,7 +200,7 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
           numbers.map((number, index) => (
             <li
               key={index}
-              className={`w-9 py-1 text-center border border-slate-700 rounded-md ${
+              className={`w-7 sm:w-9 sm:py-1 text-center border border-slate-700 rounded-md ${
                 currentPage === number
                   ? "bg-slate-600 text-white"
                   : "text-slate-700 "
@@ -214,7 +213,7 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
           ))
         )}
         {/* Next Btn */}
-        <li className="py-[3px] text-center border border-slate-700 text-slate-700 w-9 rounded-md">
+        <li className="sm:py-[3px] text-center border border-slate-700 text-slate-700 w-7 sm:w-9 rounded-md">
           <a href="#" onClick={nextPage} className="text-xl">
             &#x3e;
           </a>
