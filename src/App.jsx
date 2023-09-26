@@ -1,36 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 // import Layout from "./Components/Layout";
 import CharacterList from "./pages/CharacterList";
-import { QueryProvider } from "./context/QueryContext";
 import CharacterDetails from "./pages/CharacterDetails";
-import { useState } from "react";
+import Providers from "./Components/Providers";
 
 function App() {
-  const [Favourites, setFavourites] = useState([]);
-  console.log(Favourites);
   return (
-    <QueryProvider>
+    <Providers>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <CharacterList
-              Favourites={Favourites}
-              setFavourites={setFavourites}
-            />
-          }
-        />
-        <Route
-          path="character/:id"
-          element={
-            <CharacterDetails
-              Favourites={Favourites}
-              setFavourites={setFavourites}
-            />
-          }
-        />
+        <Route path="/" element={<CharacterList />} />
+        <Route path="character/:id" element={<CharacterDetails />} />
       </Routes>
-    </QueryProvider>
+    </Providers>
   );
 }
 
