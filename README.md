@@ -1,4 +1,4 @@
-# React + Vite
+# React-harry-potter-api
 
 This is a harry-potter App; That I developped it with React Js and Tailwind css. The api i used is:<a href="https://hp-api.onrender.com/api/">https://hp-api.onrender.com/api/</p>
 working with muli-Contexts was a challenging for me in this App! 
@@ -22,6 +22,20 @@ In this app User can choose a category (Characters, Spells or Staff), The relate
 | useContext         | useSearch
 |                    | usePagination
  
+
+## Development setup
+#### First, clone the project:
+git clone https://github.com/masoumehmohebbi/react-harry-potter-api/
+
+#### Then, install necessary npm packages:
+npm i
+
+#### Finally, run the `start` script and preview project on a local server:
+npm run dev
+
+## Author
+<a href="https://www.linkedin.com/in/masoumemohebbi">Masoume mohebbi</a>
+
 
 
 
