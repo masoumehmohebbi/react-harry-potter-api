@@ -1,9 +1,8 @@
 # React + Vite
 
-This is a harry-potter App. That I developped it with React Js and Tailwind css. the api i used is:
-<a href="https://hp-api.onrender.com/api/">https://hp-api.onrender.com/api/</p>
+This is a harry-potter App; That I developped it with React Js and Tailwind css. The api i used is:<a href="https://hp-api.onrender.com/api/">https://hp-api.onrender.com/api/</p>
 working with muli-Contexts was a challenging for me in this App! 
-In this app User can choose a category (Characters, Spells or Staff). the related data will apear. adding item to favourite (LocalStorage) or removed it from favourites-part, searching in datas are the features of this app!
+In this app User can choose a category (Characters, Spells or Staff), The related data will be apear. adding item to favourite (LocalStorage) or removed it from favourites-part, searching in datas, Pagination between data are the features of this app!
 
 <figure>
   <img src="https://github.com/masoumehmohebbi/react-harry-potter-api/blob/main/App-IMG-2.jpeg"/>
@@ -21,7 +20,7 @@ In this app User can choose a category (Characters, Spells or Staff). the relate
 | useParams          | useFavourite
 | useNavigate        | useSetLocalStorage
 | useContext         | useSearch
-                     | usePagination
+|                    | usePagination
  
 
 
