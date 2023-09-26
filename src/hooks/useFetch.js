@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react"
 import toast from "react-hot-toast";
 
-function useFetch(query) {
+function useFetch(query,search) {
     const [allData , setAllData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
 
@@ -15,15 +15,15 @@ function useFetch(query) {
             setIsLoading(true)
            try {
             const  {data}  = await axios.get(
-              `https://hp-api.onrender.com/api/${query}` , {signal}
+              `https://hp-api.onrender.com/api/${query}/?name=${search}` , {signal}
             );
             setAllData(data);
 
            } catch (err) {
           
-            toast.error(err.message)
-            if (!axios.isCancel) {
-              setAllData([])
+             if (!axios.isCancel) {
+               setAllData([])
+               toast.error(err.message)
             
             }
 
@@ -32,7 +32,7 @@ function useFetch(query) {
            }
           };
           fetchData();
-        }, [query]);
+        }, [query,search]);
 
   return {allData , isLoading}
 }
