@@ -1,6 +1,9 @@
 # React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a harry-potter App. That I developped it with React Js and Tailwind css. the api i used is:
+<a href="https://hp-api.onrender.com/api/">https://hp-api.onrender.com/api/</p>
+working with muli-Contexts was a challenging for me in this App! 
+In this app User can choose a category (Characters, Spells or Staff). the related data will apear. adding item to favourite (LocalStorage) or removed it from favourites-part, searching in datas are the features of this app!
 
 <figure>
   <img src="https://github.com/masoumehmohebbi/react-harry-potter-api/blob/main/App-IMG-2.jpeg"/>
@@ -17,7 +20,9 @@ This template provides a minimal setup to get React working in Vite with HMR and
 | useEffect          | useFetch
 | useParams          | useFavourite
 | useNavigate        | useSetLocalStorage
-| useContext  
+| useContext         | useSearch
+                     | usePagination
+ 
 
 
 
