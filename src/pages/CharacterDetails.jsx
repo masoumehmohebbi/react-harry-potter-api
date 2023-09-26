@@ -1,11 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import Header from "../Components/Header";
+import Header, { Favourite } from "../Components/Header";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IoIosClose, IoIosCheckmark } from "react-icons/io";
 import { HiArrowUturnLeft } from "react-icons/hi2";
 
-function CharacterDetails() {
+function CharacterDetails({ Favourites, setFavourites }) {
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -35,9 +35,10 @@ function CharacterDetails() {
   return (
     <div>
       <Header>
-        <button className="absolute flex justify-center bottom-2 px-3 py-1 rounded-2xl bg-purple-300 items-center text-white">
+        {/* <button className="absolute flex justify-center bottom-2 px-3 py-1 rounded-2xl bg-purple-300 items-center text-white">
           Add To Favourite
-        </button>
+        </button> */}
+        <span></span>
         <button
           onClick={() => navigate("/")}
           className="text-white flex items-center font-black"
@@ -45,26 +46,43 @@ function CharacterDetails() {
           <HiArrowUturnLeft size={30} className="mr-2" />
           Back to Home
         </button>
+        <Favourite Favourites={Favourites} setFavourites={setFavourites} />
       </Header>
-      <Details selectedItem={selectedItem} />
+      <Details selectedItem={selectedItem} setFavourites={setFavourites} />
     </div>
   );
 }
 
 export default CharacterDetails;
 
-function Details({ selectedItem }) {
+function Details({ selectedItem, setFavourites }) {
+  const [isAddToFavourite, setIsAddToFavourite] = useState(false);
+  const handleAddFavourite = (char) => {
+    setFavourites((preFav) => [...preFav, char]);
+    setIsAddToFavourite((is) => !is);
+  };
+
   return (
     <section className="flex items-center justify-center mt-9 px-4">
       {selectedItem &&
         selectedItem.map((item) => (
           <div key={item.key} className="grid grid-cols-8 sm:gap-x-7">
-            <div className="col-span-3 w-full h-40 sm:h-80 sticky top-0">
+            <div className="col-span-3 w-full space-y-3 h-40 sm:h-80 sticky top-0 flex flex-col justify-center">
               <img
                 src={item.image ? item.image : "/src/assets/Images/avator.png"}
                 alt={item.name}
                 className="w-full h-full"
               />
+              {isAddToFavourite ? (
+                <p>Already Added To Favourites ✅</p>
+              ) : (
+                <button
+                  onClick={() => handleAddFavourite(item)}
+                  className="flex justify-center bottom-2 px-3 py-1 rounded-2xl bg-orange-500 items-center text-white"
+                >
+                  Add To Favourite
+                </button>
+              )}
             </div>
             <ul className="col-span-5 flex flex-col pl-4 gap-y-5 mb-5">
               <li className="border-b-2 pb-2 pl-2">
