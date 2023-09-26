@@ -7,24 +7,36 @@ import { PiHouseLineBold } from "react-icons/pi";
 import useFetch from "../hooks/useFetch";
 import { useQuery } from "../context/QueryContext";
 import Loader from "../Components/Loader";
-import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 import Header, { NumOfresult, Search, Favourite } from "../Components/Header";
+import { usePagination } from "../context/PaginationContext";
+import { useSearch } from "../context/SearchContext";
+import { useEffect, useState } from "react";
 
 function CharacterList() {
   const navigate = useNavigate();
   // Pagination Config
   const { query } = useQuery();
-  const { allData } = useFetch(query);
-  const [currentPage, setCurrentPage] = useState(1);
-  const recordsPerPage = 9;
-  const lastIndex = currentPage * recordsPerPage;
-  const firstIndex = lastIndex - recordsPerPage;
-  const records = allData.slice(firstIndex, lastIndex);
-  const npage = Math.ceil(allData.length / recordsPerPage);
-  const numbers = [...Array(npage + 1).keys()].slice(1);
-  // End Of Pagination Config
+  const { search } = useSearch();
+  const { allData } = useFetch(query, search);
 
+  // Pagination Config
+  const { records, currentPage, setCurrentPage, npage, numbers } =
+    usePagination();
+  // End Of Pagination Config
+  const [newData, setNewData] = useState(records);
+
+  useEffect(() => {
+    const filteredCharacters = records.filter((character) => {
+      return character.name.toLowerCase().includes(search.toLowerCase());
+    });
+    if (filteredCharacters.length) {
+      setNewData(filteredCharacters);
+    } else {
+      setNewData(records);
+    }
+  }, [search, records]);
   return (
     <>
       <Header>
@@ -32,11 +44,11 @@ function CharacterList() {
         <NumOfresult allData={allData} />
         <Favourite />
       </Header>
-      {records.length ? (
+      {newData.length ? (
         <>
           <section className="grid grid-cols-1 min-[600px]:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-5">
             {query !== "spells" &&
-              records.map((data) => (
+              newData.map((data) => (
                 <Character key={data.id} data={data}>
                   <HiOutlineEye
                     onClick={() => navigate(`character/${data.id}`)}
@@ -46,7 +58,7 @@ function CharacterList() {
               ))}
 
             {query === "spells" &&
-              records.map((data) => <Spells key={data.id} item={data} />)}
+              newData.map((data) => <Spells key={data.id} item={data} />)}
           </section>
 
           <Pagination
