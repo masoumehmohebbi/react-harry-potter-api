@@ -3,7 +3,11 @@ import { createContext, useContext, useState } from "react";
 const FavouriteContext = createContext();
 
 export function FavouriteProvider({ children }) {
-  const [Favourites, setFavourites] = useState([]);
+  const [Favourites, setFavourites] = useState(
+    () => JSON.parse(localStorage.getItem("FAVOURITES")) || []
+  );
+  // const [Favourites, setFavourites] = useState([]);
+
   return (
     <FavouriteContext.Provider value={{ Favourites, setFavourites }}>
       {children}
