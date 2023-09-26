@@ -1,7 +1,10 @@
-import { BiHeart, BiSearch } from "react-icons/bi";
+import { BiHeart, BiSearch, BiTrashAlt } from "react-icons/bi";
 import Select from "react-select";
 import { useQuery } from "../context/QueryContext";
 import { Toaster } from "react-hot-toast";
+import { useState } from "react";
+import Modal from "./Modal";
+import { Character } from "../pages/CharacterList";
 
 const options = [
   { value: "characters", label: "Characters" },
@@ -52,7 +55,8 @@ function Header({ children }) {
       <div className="absolute left-0 top-1 pt-1 pl-3 text-white">
         {children[1]}
       </div>
-      <Favourites />
+      {/* <Favourites /> */}
+      {children[2]}
     </div>
   );
 }
@@ -80,16 +84,42 @@ export function Search() {
     </div>
   );
 }
-function Favourites() {
+export function Favourite({ Favourites, setFavourites }) {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleFavRemove = (id) => {
+    const filteredFev = Favourites.filter((item) => item.id !== id);
+    setFavourites(filteredFev);
+  };
+
   return (
-    <div className="absolute right-0 top-1 pr-5">
-      <button className="relative">
-        <BiHeart size={39} className="text-red-500" />
-        <span className="absolute top-0 -right-[6px] h-6 w-6 text-sm rounded-full bg-red-500 flex justify-center items-center">
-          0
-        </span>
-      </button>
-    </div>
+    <>
+      <Modal title="List of Favourites" onOpen={setIsOpen} open={isOpen}>
+        <main className="mt-2">
+          {Favourites &&
+            Favourites.map((item) => (
+              <div key={item.id} className="px-5 py-2">
+                <Character data={item}>
+                  <button
+                    onClick={() => handleFavRemove(item.id)}
+                    className="text-red-600 text-2xl"
+                  >
+                    <BiTrashAlt />
+                  </button>
+                </Character>
+              </div>
+            ))}
+        </main>
+      </Modal>
+      <div className="absolute right-0 top-1 pr-5">
+        <button className="relative" onClick={() => setIsOpen((is) => !is)}>
+          <BiHeart size={39} className="text-red-500" />
+          <span className="absolute top-0 -right-[6px] h-6 w-6 text-sm rounded-full bg-red-500 flex justify-center items-center">
+            {Favourites.length}
+          </span>
+        </button>
+      </div>
+    </>
   );
 }
 export function NumOfresult({ allData }) {
