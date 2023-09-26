@@ -9,9 +9,10 @@ import { useQuery } from "../context/QueryContext";
 import Loader from "../Components/Loader";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Header, { NumOfresult, Search } from "../Components/Header";
+import Header, { NumOfresult, Search, Favourite } from "../Components/Header";
 
-function CharacterList() {
+function CharacterList({ Favourites, setFavourites }) {
+  const navigate = useNavigate();
   // Pagination Config
   const { query } = useQuery();
   const { allData } = useFetch(query);
@@ -29,13 +30,19 @@ function CharacterList() {
       <Header>
         <Search />
         <NumOfresult allData={allData} />
+        <Favourite Favourites={Favourites} setFavourites={setFavourites} />
       </Header>
       {records.length ? (
         <>
           <section className="grid grid-cols-1 min-[600px]:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center p-5">
             {query !== "spells" &&
               records.map((data) => (
-                <Character key={data.id} data={data} id={data.id} />
+                <Character key={data.id} data={data}>
+                  <HiOutlineEye
+                    onClick={() => navigate(`character/${data.id}`)}
+                    className="cursor-pointer text-red-600 w-5 h-5 md:w-6 md:h-6"
+                  />
+                </Character>
               ))}
 
             {query === "spells" &&
@@ -63,8 +70,8 @@ function CharacterList() {
 
 export default CharacterList;
 
-function Character({ data, id }) {
-  const navigate = useNavigate();
+export function Character({ data, children }) {
+  // const navigate = useNavigate();
   return (
     <div className="grid bg-[#F3DEBA] shadow-lg rounded-md p-1 grid-rows-2 grid-cols-8 justify-items-center">
       <img
@@ -102,10 +109,11 @@ function Character({ data, id }) {
         </span>
       </div>
       <div className="row-span-2 col-span-1 flex items-center pr-2">
-        <HiOutlineEye
+        {children}
+        {/* <HiOutlineEye
           onClick={() => navigate(`character/${id}`)}
           className="cursor-pointer text-red-600 w-5 h-5 md:w-6 md:h-6"
-        />
+        /> */}
       </div>
     </div>
   );
