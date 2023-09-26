@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header, { NumOfresult, Search, Favourite } from "../Components/Header";
 
-function CharacterList({ Favourites, setFavourites }) {
+function CharacterList() {
   const navigate = useNavigate();
   // Pagination Config
   const { query } = useQuery();
@@ -30,7 +30,7 @@ function CharacterList({ Favourites, setFavourites }) {
       <Header>
         <Search />
         <NumOfresult allData={allData} />
-        <Favourite Favourites={Favourites} setFavourites={setFavourites} />
+        <Favourite />
       </Header>
       {records.length ? (
         <>
@@ -71,7 +71,6 @@ function CharacterList({ Favourites, setFavourites }) {
 export default CharacterList;
 
 export function Character({ data, children }) {
-  // const navigate = useNavigate();
   return (
     <div className="grid bg-[#F3DEBA] shadow-lg rounded-md p-1 grid-rows-2 grid-cols-8 justify-items-center">
       <img
@@ -110,10 +109,6 @@ export function Character({ data, children }) {
       </div>
       <div className="row-span-2 col-span-1 flex items-center pr-2">
         {children}
-        {/* <HiOutlineEye
-          onClick={() => navigate(`character/${id}`)}
-          className="cursor-pointer text-red-600 w-5 h-5 md:w-6 md:h-6"
-        /> */}
       </div>
     </div>
   );
