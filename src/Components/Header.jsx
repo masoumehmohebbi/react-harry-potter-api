@@ -48,7 +48,7 @@ function Header({ children }) {
   return (
     <div className="flex flex-col justify-center relative bg-[url('./assets/images/header.jpg')] h-52 bg-top">
       <Toaster />
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center ">
         <h1 className="font-harrypotter text-2xl sm:text-3xl md:text-4xl text-center text-white">
           Welcome to Harry Potter Universe!
         </h1>
@@ -68,8 +68,6 @@ export function Search() {
   const { setQuery } = useQuery();
   const { setSearch } = useSearch();
 
-  // const { setFilteredTerm, records } = usePagination();
-
   const handleSelect = (e) => {
     setQuery(e.value);
   };
@@ -80,7 +78,7 @@ export function Search() {
   return (
     <div className="absolute bottom-2 w-11/12 grid grid-cols-7">
       <Select
-        className="col-span-2 mr-[1px]"
+        className="col-span-2 mr-[1px] text-xs sm:text-base"
         options={options}
         styles={selectStyles}
         placeholder="Category..."
@@ -137,7 +135,7 @@ export function Favourite() {
       </Modal>
       <div className="absolute right-0 top-1 pr-5">
         <button className="relative" onClick={() => setIsOpen((is) => !is)}>
-          <BiHeart size={39} className="text-red-500" />
+          <BiHeart className="text-red-500 w-9 h-9 sm:w-10 sm:h-10" />
           <span className="absolute top-0 -right-[6px] h-6 w-6 text-sm rounded-full bg-red-500 flex justify-center items-center">
             {Favourites.length}
           </span>
