@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IoIosClose, IoIosCheckmark } from "react-icons/io";
 import { HiArrowUturnLeft } from "react-icons/hi2";
+import { BiSolidCommentCheck } from "react-icons/bi";
+import { useFavourite } from "../context/FavouritesContext";
 
-function CharacterDetails({ Favourites, setFavourites }) {
+function CharacterDetails() {
   const navigate = useNavigate();
   const { id } = useParams();
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [isAddToFavourite, setIsAddToFavourite] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -46,17 +49,21 @@ function CharacterDetails({ Favourites, setFavourites }) {
           <HiArrowUturnLeft size={30} className="mr-2" />
           Back to Home
         </button>
-        <Favourite Favourites={Favourites} setFavourites={setFavourites} />
+        <Favourite setIsAddToFavourite={setIsAddToFavourite} />
       </Header>
-      <Details selectedItem={selectedItem} setFavourites={setFavourites} />
+      <Details
+        selectedItem={selectedItem}
+        isAddToFavourite={isAddToFavourite}
+        setIsAddToFavourite={setIsAddToFavourite}
+      />
     </div>
   );
 }
 
 export default CharacterDetails;
 
-function Details({ selectedItem, setFavourites }) {
-  const [isAddToFavourite, setIsAddToFavourite] = useState(false);
+function Details({ selectedItem, isAddToFavourite, setIsAddToFavourite }) {
+  const { setFavourites } = useFavourite();
   const handleAddFavourite = (char) => {
     setFavourites((preFav) => [...preFav, char]);
     setIsAddToFavourite((is) => !is);
@@ -74,7 +81,10 @@ function Details({ selectedItem, setFavourites }) {
                 className="w-full h-full"
               />
               {isAddToFavourite ? (
-                <p>Already Added To Favourites ✅</p>
+                <p className="flex items-end font-bold italic pt-4">
+                  Already Added To Favourites{" "}
+                  <BiSolidCommentCheck className="text-green-600 w-7 h-7 ml-2" />
+                </p>
               ) : (
                 <button
                   onClick={() => handleAddFavourite(item)}
