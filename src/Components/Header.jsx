@@ -7,6 +7,8 @@ import { Character } from "../pages/CharacterList";
 import { useFavourite } from "../context/FavouritesContext";
 import useSetLocalStorage from "../hooks/useSetLocalStorage";
 import { useState } from "react";
+import { useAddedFav } from "../context/AddedFavContext";
+import { useSearch } from "../context/SearchContext";
 
 const options = [
   { value: "characters", label: "Characters" },
@@ -52,12 +54,9 @@ function Header({ children }) {
         </h1>
         {children[0]}
       </div>
-
-      {/* NumOfResult */}
       <div className="absolute left-0 top-1 pt-1 pl-3 text-white">
         {children[1]}
       </div>
-      {/* <Favourites /> */}
       {children[2]}
     </div>
   );
@@ -67,8 +66,16 @@ export default Header;
 
 export function Search() {
   const { setQuery } = useQuery();
+  const { setSearch } = useSearch();
+
+  // const { setFilteredTerm, records } = usePagination();
+
   const handleSelect = (e) => {
     setQuery(e.value);
+  };
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
   };
   return (
     <div className="absolute bottom-2 w-11/12 grid grid-cols-7">
@@ -80,13 +87,18 @@ export function Search() {
         onChange={(e) => handleSelect(e)}
       />
       <div className="col-span-5 w-full flex items-center justify-center relative">
-        <input className="w-full p-2 rounded-r-md outline-none" type="text" />
+        <input
+          onChange={(e) => handleSearch(e)}
+          className="w-full p-2 rounded-r-md outline-none capitalize"
+          type="text"
+        />
         <BiSearch className="absolute right-0 w-14 p-1 top-0 h-full text-white bg-red-500 rounded-r-md" />
       </div>
     </div>
   );
 }
-export function Favourite({ setIsAddToFavourite }) {
+export function Favourite() {
+  const { setIsAddToFavourite } = useAddedFav();
   const [isOpen, setIsOpen] = useState(false);
 
   const { Favourites, setFavourites } = useFavourite();
@@ -103,7 +115,7 @@ export function Favourite({ setIsAddToFavourite }) {
     <>
       <Modal title="List of Favourites" onOpen={setIsOpen} open={isOpen}>
         <main className="mt-2">
-          {Favourites &&
+          {Favourites.length ? (
             Favourites.map((item) => (
               <div key={item.id} className="px-5 py-2">
                 <Character data={item}>
@@ -115,7 +127,12 @@ export function Favourite({ setIsAddToFavourite }) {
                   </button>
                 </Character>
               </div>
-            ))}
+            ))
+          ) : (
+            <p className="text-center font-medium py-5">
+              There is no added yet!
+            </p>
+          )}
         </main>
       </Modal>
       <div className="absolute right-0 top-1 pr-5">
