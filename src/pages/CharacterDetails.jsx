@@ -6,7 +6,6 @@ import { IoIosClose, IoIosCheckmark } from "react-icons/io";
 import { HiArrowUturnLeft } from "react-icons/hi2";
 import { BiSolidCommentCheck } from "react-icons/bi";
 import { useFavourite } from "../context/FavouritesContext";
-import useSetLocalStorage from "../hooks/useSetLocalStorage";
 
 function CharacterDetails() {
   const navigate = useNavigate();
@@ -64,9 +63,7 @@ function CharacterDetails() {
 export default CharacterDetails;
 
 function Details({ selectedItem, isAddToFavourite, setIsAddToFavourite }) {
-  const { setFavourites, Favourites } = useFavourite();
-
-  useSetLocalStorage("FAVOURITES", Favourites);
+  const { setFavourites } = useFavourite();
 
   const handleAddFavourite = (char) => {
     setFavourites((preFav) => [...preFav, char]);
@@ -84,19 +81,21 @@ function Details({ selectedItem, isAddToFavourite, setIsAddToFavourite }) {
                 alt={item.name}
                 className="w-full h-full"
               />
-              {isAddToFavourite ? (
-                <p className="flex items-end font-bold italic pt-4">
-                  Already Added To Favourites{" "}
-                  <BiSolidCommentCheck className="text-green-600 w-7 h-7 ml-2" />
-                </p>
-              ) : (
-                <button
-                  onClick={() => handleAddFavourite(item)}
-                  className="flex justify-center bottom-2 px-3 py-1 rounded-2xl bg-orange-500 items-center text-white"
-                >
-                  Add To Favourite
-                </button>
-              )}
+              <div className="w-[15rem] pt-2 ">
+                {isAddToFavourite ? (
+                  <p className="flex text-sm items-end font-bold italic pt-[4px]">
+                    Already Added To Favourites{" "}
+                    <BiSolidCommentCheck className="text-green-600 w-7 h-7 ml-2" />
+                  </p>
+                ) : (
+                  <button
+                    onClick={() => handleAddFavourite(item)}
+                    className="flex mx-auto justify-center bottom-2 px-3 py-1 rounded-2xl bg-orange-500 items-center text-white"
+                  >
+                    Add To Favourite
+                  </button>
+                )}
+              </div>
             </div>
             <ul className="col-span-5 flex flex-col pl-4 gap-y-5 mb-5">
               <li className="border-b-2 pb-2 pl-2">
