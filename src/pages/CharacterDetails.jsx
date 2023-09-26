@@ -6,6 +6,7 @@ import { IoIosClose, IoIosCheckmark } from "react-icons/io";
 import { HiArrowUturnLeft } from "react-icons/hi2";
 import { BiSolidCommentCheck } from "react-icons/bi";
 import { useFavourite } from "../context/FavouritesContext";
+import useSetLocalStorage from "../hooks/useSetLocalStorage";
 
 function CharacterDetails() {
   const navigate = useNavigate();
@@ -63,7 +64,10 @@ function CharacterDetails() {
 export default CharacterDetails;
 
 function Details({ selectedItem, isAddToFavourite, setIsAddToFavourite }) {
-  const { setFavourites } = useFavourite();
+  const { setFavourites, Favourites } = useFavourite();
+
+  useSetLocalStorage("FAVOURITES", Favourites);
+
   const handleAddFavourite = (char) => {
     setFavourites((preFav) => [...preFav, char]);
     setIsAddToFavourite((is) => !is);
