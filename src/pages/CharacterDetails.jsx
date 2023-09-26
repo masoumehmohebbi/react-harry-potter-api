@@ -44,9 +44,9 @@ function CharacterDetails() {
         <span></span>
         <button
           onClick={() => navigate("/")}
-          className="text-white flex items-center font-black"
+          className="text-white flex items-center text-sm sm:text-base font-black"
         >
-          <HiArrowUturnLeft size={30} className="mr-2" />
+          <HiArrowUturnLeft className="mr-2 w-6 h-6 sm:w-8 sm:h-8" />
           Back to Home
         </button>
         <Favourite />
@@ -64,22 +64,23 @@ function Details({ selectedItem }) {
 
   const handleAddFavourite = (char) => {
     setFavourites((preFav) => [...preFav, char]);
-    setIsAddToFavourite((is) => !is);
+
+    setIsAddToFavourite(char.id);
   };
 
   return (
     <section className="flex items-center justify-center mt-9 px-4">
       {selectedItem &&
         selectedItem.map((item) => (
-          <div key={item.key} className="grid grid-cols-8 sm:gap-x-7">
+          <div key={item.id} className="grid grid-cols-8 sm:gap-x-7">
             <div className="col-span-3 w-full space-y-3 h-40 sm:h-80 sticky top-0 flex flex-col justify-center">
               <img
                 src={item.image ? item.image : "/src/assets/Images/avator.png"}
                 alt={item.name}
                 className="w-full h-full"
               />
-              <div className="w-[15rem] pt-2 ">
-                {isAddToFavourite ? (
+              <div className="sm:w-[15rem] pt-2 text-xs sm:text-base">
+                {isAddToFavourite === item.id ? (
                   <p className="flex text-sm items-end font-bold italic pt-[4px]">
                     Already Added To Favourites{" "}
                     <BiSolidCommentCheck className="text-green-600 w-7 h-7 ml-2" />
@@ -87,36 +88,48 @@ function Details({ selectedItem }) {
                 ) : (
                   <button
                     onClick={() => handleAddFavourite(item)}
-                    className="flex mx-auto justify-center bottom-2 px-3 py-1 rounded-2xl bg-orange-500 items-center text-white"
+                    className="flex mx-auto justify-center bottom-2 px-1 sm:px-3 py-1 rounded-2xl bg-orange-500 items-center text-white"
                   >
                     Add To Favourite
                   </button>
                 )}
               </div>
             </div>
-            <ul className="col-span-5 flex flex-col pl-4 gap-y-5 mb-5">
+            <ul className="col-span-5 flex flex-col pl-4 gap-y-5 mb-5 text-xs sm:text-base">
               <li className="border-b-2 pb-2 pl-2">
-                <span className="font-black text-lg pr-2">Name:</span>{" "}
+                <span className="font-black text-base sm:text-lg pr-2">
+                  Name:
+                </span>{" "}
                 {item.name}
               </li>
               <li className="border-b-2 pb-2 pl-2">
-                <span className="font-black text-lg pr-2">Actor:</span>{" "}
+                <span className="font-black text-base sm:text-lg pr-2">
+                  Actor:
+                </span>{" "}
                 {item.actor}
               </li>
               <li className="border-b-2 pb-2 pl-2">
-                <span className="font-black text-lg pr-2">Birthday:</span>
+                <span className="font-black text-base sm:text-lg pr-2">
+                  Birthday:
+                </span>
                 {item.dateOfBirth ? item.dateOfBirth : "---"}
               </li>
               <li className="border-b-2 pb-2 pl-2">
-                <span className="font-black text-lg pr-2">Eye Colour: </span>
+                <span className="font-black text-base sm:text-lg pr-2">
+                  Eye Colour:{" "}
+                </span>
                 {item.eyeColour ? item.eyeColour : "---"}
               </li>
               <li className="border-b-2 pb-2 pl-2">
-                <span className="font-black text-lg pr-2">Hair Colour:</span>
+                <span className="font-black text-base sm:text-lg pr-2">
+                  Hair Colour:
+                </span>
                 {item.hairColour}
               </li>
               <li className="border-b-2 pb-2 pl-2 flex items-center">
-                <span className="font-black text-lg pr-2">Wizard:</span>
+                <span className="font-black text-base sm:text-lg pr-2">
+                  Wizard:
+                </span>
                 {item.wizard ? (
                   <IoIosCheckmark className="text-green-600" size={35} />
                 ) : (
@@ -124,11 +137,13 @@ function Details({ selectedItem }) {
                 )}
               </li>
               <li className="border-b-2 pb-2 pl-2">
-                <span className="font-black text-lg pr-2">Wood:</span>
+                <span className="font-black text-base sm:text-lg pr-2">
+                  Wood:
+                </span>
                 {item.wand.wood ? item.wand.wood : "---"}
               </li>
               <li className="border-b-2 pb-2 pl-2 flex items-center">
-                <span className="font-black text-lg pr-2">
+                <span className="font-black text-base sm:text-lg pr-2">
                   Is Hagwarts Studend?
                 </span>
                 {item.hogwartsStudent ? (
@@ -138,7 +153,7 @@ function Details({ selectedItem }) {
                 )}
               </li>
               <li className="border-b-2 pb-2 pl-2 flex items-center">
-                <span className="font-black text-lg pr-2">
+                <span className="font-black text-base sm:text-lg pr-2">
                   Is Hagwarts Staff?
                 </span>
 
@@ -148,8 +163,8 @@ function Details({ selectedItem }) {
                   <IoIosClose className="text-red-600" size={34} />
                 )}
               </li>
-              <li className="pb-2 pl-2">
-                <span className="font-black text-lg pr-2">
+              <ul className="pb-2 pl-2">
+                <span className="font-black text-base sm:text-lg pr-2">
                   Alternate Names:
                 </span>
 
@@ -158,7 +173,7 @@ function Details({ selectedItem }) {
                       <li key={index}>{i}</li>
                     ))
                   : "---"}
-              </li>
+              </ul>
             </ul>
           </div>
         ))}
