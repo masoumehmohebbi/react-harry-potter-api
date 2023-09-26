@@ -6,6 +6,7 @@ import { IoIosClose, IoIosCheckmark } from "react-icons/io";
 import { HiArrowUturnLeft } from "react-icons/hi2";
 import { BiSolidCommentCheck } from "react-icons/bi";
 import { useFavourite } from "../context/FavouritesContext";
+import { useAddedFav } from "../context/AddedFavContext";
 
 function CharacterDetails() {
   const navigate = useNavigate();
@@ -13,7 +14,6 @@ function CharacterDetails() {
 
   const [selectedItem, setSelectedItem] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [isAddToFavourite, setIsAddToFavourite] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,21 +49,18 @@ function CharacterDetails() {
           <HiArrowUturnLeft size={30} className="mr-2" />
           Back to Home
         </button>
-        <Favourite setIsAddToFavourite={setIsAddToFavourite} />
+        <Favourite />
       </Header>
-      <Details
-        selectedItem={selectedItem}
-        isAddToFavourite={isAddToFavourite}
-        setIsAddToFavourite={setIsAddToFavourite}
-      />
+      <Details selectedItem={selectedItem} />
     </div>
   );
 }
 
 export default CharacterDetails;
 
-function Details({ selectedItem, isAddToFavourite, setIsAddToFavourite }) {
+function Details({ selectedItem }) {
   const { setFavourites } = useFavourite();
+  const { isAddToFavourite, setIsAddToFavourite } = useAddedFav();
 
   const handleAddFavourite = (char) => {
     setFavourites((preFav) => [...preFav, char]);
