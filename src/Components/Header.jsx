@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import { useState } from "react";
 import Modal from "./Modal";
 import { Character } from "../pages/CharacterList";
+import { useFavourite } from "../context/FavouritesContext";
 
 const options = [
   { value: "characters", label: "Characters" },
@@ -84,12 +85,14 @@ export function Search() {
     </div>
   );
 }
-export function Favourite({ Favourites, setFavourites }) {
+export function Favourite({ setIsAddToFavourite }) {
   const [isOpen, setIsOpen] = useState(false);
 
+  const { Favourites, setFavourites } = useFavourite();
   const handleFavRemove = (id) => {
     const filteredFev = Favourites.filter((item) => item.id !== id);
     setFavourites(filteredFev);
+    setIsAddToFavourite((is) => !is);
   };
 
   return (
