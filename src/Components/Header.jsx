@@ -75,15 +75,15 @@ export function Search() {
     setSearch(e.target.value);
   };
   return (
-    <div className="absolute bottom-2 w-11/12 grid grid-cols-7">
+    <div className="absolute bottom-2 w-11/12 grid grid-cols-8">
       <Select
-        className="col-span-2 mr-[1px] text-xs sm:text-base"
+        className="col-span-3 sm:col-span-2 mr-[1px] font-semibold capitalize text-xs sm:text-base"
         options={options}
         styles={selectStyles}
         placeholder="Category..."
         onChange={(e) => handleSelect(e)}
       />
-      <div className="col-span-5 w-full flex items-center justify-center relative">
+      <div className="col-span-5 sm:col-span-6 w-full flex items-center justify-center relative">
         <input
           onChange={(e) => handleSearch(e)}
           className="w-full p-2 rounded-r-md outline-none capitalize"
