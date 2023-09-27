@@ -79,7 +79,7 @@ function Details({ selectedItem, selectedId }) {
                 src={
                   item.image
                     ? item.image
-                    : "https://o.remove.bg/downloads/aa464b5b-26f3-444a-bc31-1ec7c711253b/avator-removebg-preview.png"
+                    : "https://s6.uupload.ir/files/avator-removebg-preview_(2)_mpvv.png"
                 }
                 alt={item.name}
                 className="w-full h-full"
