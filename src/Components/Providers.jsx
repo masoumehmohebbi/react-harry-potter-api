@@ -1,4 +1,3 @@
-import { AddedFavProvider } from "../context/AddedFavContext";
 import { FavouriteProvider } from "../context/FavouritesContext";
 import { PaginationProvider } from "../context/PaginationContext";
 import { QueryProvider } from "../context/QueryContext";
@@ -9,9 +8,7 @@ function Providers({ children }) {
     <QueryProvider>
       <PaginationProvider>
         <SearchProvider>
-          <AddedFavProvider>
-            <FavouriteProvider>{children}</FavouriteProvider>
-          </AddedFavProvider>
+          <FavouriteProvider>{children}</FavouriteProvider>
         </SearchProvider>
       </PaginationProvider>
     </QueryProvider>
