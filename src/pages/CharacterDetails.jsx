@@ -76,7 +76,11 @@ function Details({ selectedItem, selectedId }) {
           <div key={item.id} className="grid grid-cols-8 sm:gap-x-7">
             <div className="col-span-3 w-full space-y-3 h-40 sm:h-80 sticky top-0 flex flex-col justify-center">
               <img
-                src={item.image ? item.image : "/src/assets/Images/avator.png"}
+                src={
+                  item.image
+                    ? item.image
+                    : "https://o.remove.bg/downloads/aa464b5b-26f3-444a-bc31-1ec7c711253b/avator-removebg-preview.png"
+                }
                 alt={item.name}
                 className="w-full h-full"
               />
