@@ -89,7 +89,7 @@ export function Search() {
           className="w-full p-2 rounded-r-md outline-none capitalize"
           type="text"
         />
-        <BiSearch className="absolute right-0 w-14 p-1 top-0 h-full text-white bg-red-500 rounded-r-md" />
+        <BiSearch className="absolute right-0 w-9 sm:w-14 p-1 top-0 h-full text-white bg-red-500 rounded-r-md" />
       </div>
     </div>
   );
@@ -133,7 +133,7 @@ export function Favourite() {
       <div className="absolute right-0 top-1 pr-5">
         <button className="relative" onClick={() => setIsOpen((is) => !is)}>
           <BiHeart className="text-red-500 w-9 h-9 sm:w-10 sm:h-10" />
-          <span className="absolute top-0 -right-[6px] h-6 w-6 text-sm rounded-full bg-red-500 flex justify-center items-center">
+          <span className="absolute top-0 -right-[6px] h-5 w-5 sm:h-6 sm:w-6 text-sm rounded-full bg-red-500 flex justify-center items-center">
             {Favourites.length}
           </span>
         </button>
