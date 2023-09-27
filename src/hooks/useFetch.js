@@ -32,9 +32,9 @@ function useFetch(query,search) {
            }
           };
           fetchData();
-        return () => {
-      controller.abort();
-    };
+          return () => {
+              controller.abort();
+          };
         }, [query,search]);
 
   return {allData , isLoading}
