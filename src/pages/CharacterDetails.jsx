@@ -75,6 +75,7 @@ function Details({ selectedItem, selectedId }) {
           <div key={item.id} className="grid grid-cols-8 sm:gap-x-7">
             <div className="col-span-3 w-full space-y-3 h-40 sm:h-80 sticky top-0 flex flex-col justify-center">
               <img
+                loading="lazy"
                 src={
                   item.image
                     ? item.image
