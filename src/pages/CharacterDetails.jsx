@@ -6,7 +6,6 @@ import { IoIosClose, IoIosCheckmark } from "react-icons/io";
 import { HiArrowUturnLeft } from "react-icons/hi2";
 import { BiSolidCommentCheck } from "react-icons/bi";
 import { useFavourite } from "../context/FavouritesContext";
-import { useAddedFav } from "../context/AddedFavContext";
 
 function CharacterDetails() {
   const navigate = useNavigate();
@@ -51,22 +50,24 @@ function CharacterDetails() {
         </button>
         <Favourite />
       </Header>
-      <Details selectedItem={selectedItem} />
+      <Details selectedItem={selectedItem} selectedId={id} />
     </div>
   );
 }
 
 export default CharacterDetails;
 
-function Details({ selectedItem }) {
-  const { setFavourites } = useFavourite();
-  const { isAddToFavourite, setIsAddToFavourite } = useAddedFav();
+function Details({ selectedItem, selectedId }) {
+  const { setFavourites, Favourites } = useFavourite();
 
   const handleAddFavourite = (char) => {
     setFavourites((preFav) => [...preFav, char]);
-
-    setIsAddToFavourite(char.id);
   };
+
+  const isAddedToFavourite = Favourites.map((fav) => fav.id).includes(
+    selectedId
+  );
+  console.log(isAddedToFavourite);
 
   return (
     <section className="flex items-center justify-center mt-9 px-4">
@@ -80,7 +81,7 @@ function Details({ selectedItem }) {
                 className="w-full h-full"
               />
               <div className="sm:w-[15rem] pt-2 text-xs sm:text-base">
-                {isAddToFavourite === item.id ? (
+                {isAddedToFavourite ? (
                   <p className="flex text-sm items-end font-bold italic pt-[4px]">
                     Already Added To Favourites{" "}
                     <BiSolidCommentCheck className="text-green-600 w-7 h-7 ml-2" />
