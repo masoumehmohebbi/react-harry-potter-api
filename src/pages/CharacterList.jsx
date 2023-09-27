@@ -86,7 +86,11 @@ export function Character({ data, children }) {
     <div className="grid bg-[#F3DEBA] shadow-lg rounded-md p-1 grid-rows-2 grid-cols-8 justify-items-center">
       <img
         className="rounded-lg object-cover col-span-2 row-span-2"
-        src={data.image ? data.image : "./src/assets/Images/avator.png"}
+        src={
+          data.image
+            ? data.image
+            : "https://o.remove.bg/downloads/aa464b5b-26f3-444a-bc31-1ec7c711253b/avator-removebg-preview.png"
+        }
         alt=""
       />
 
