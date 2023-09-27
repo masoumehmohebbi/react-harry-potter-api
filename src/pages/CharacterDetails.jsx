@@ -67,7 +67,6 @@ function Details({ selectedItem, selectedId }) {
   const isAddedToFavourite = Favourites.map((fav) => fav.id).includes(
     selectedId
   );
-  console.log(isAddedToFavourite);
 
   return (
     <section className="flex items-center justify-center mt-9 px-4">
@@ -86,14 +85,14 @@ function Details({ selectedItem, selectedId }) {
               />
               <div className="sm:w-[15rem] pt-2 text-xs sm:text-base">
                 {isAddedToFavourite ? (
-                  <p className="flex text-sm items-end font-bold italic pt-[4px]">
+                  <p className="flex text-xs items-start sm:text-sm font-bold italic pt-[4px]">
                     Already Added To Favourites{" "}
-                    <BiSolidCommentCheck className="text-green-600 w-7 h-7 ml-2" />
+                    <BiSolidCommentCheck className="text-green-600 w-7 h-7 sm:ml-2" />
                   </p>
                 ) : (
                   <button
                     onClick={() => handleAddFavourite(item)}
-                    className="flex mx-auto justify-center bottom-2 px-1 sm:px-3 py-1 rounded-2xl bg-orange-500 items-center text-white"
+                    className="flex mx-auto justify-center bottom-2 px-2 sm:px-3 py-1 rounded-2xl bg-orange-500 items-center text-white"
                   >
                     Add To Favourite
                   </button>
