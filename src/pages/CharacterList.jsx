@@ -159,8 +159,11 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
     <nav className=" flex w-full items-center justify-center mt-9 mb-11">
       <ul className="flex gap-x-2 rounded-md items-center text-lg">
         {/* Prev Bn */}
-        <li className="sm:py-[3px] text-center border border-slate-700 text-slate-700 w-7 sm:w-9 rounded-md">
-          <a href="#" onClick={prePage} className="text-xl">
+        <li
+          onClick={prePage}
+          className="sm:py-[3px] cursor-pointer text-center border border-slate-700 text-slate-700 w-7 sm:w-9 rounded-md"
+        >
+          <a href="#" className="text-xl">
             &#x3c;
           </a>
         </li>
@@ -170,15 +173,14 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
             {numbers.slice(0, 1).map((number, index) => (
               <li
                 key={index}
-                className={`w-7 sm:w-9 sm:py-1 text-center border border-slate-700 rounded-md ${
+                onClick={() => changeCPage(number)}
+                className={`w-7 cursor-pointer sm:w-9 sm:py-1 text-center border border-slate-700 rounded-md ${
                   currentPage === number
                     ? "bg-slate-600 text-white"
                     : "text-slate-700"
                 }`}
               >
-                <a href="#" onClick={() => changeCPage(number)}>
-                  {number}
-                </a>
+                <a href="#">{number}</a>
               </li>
             ))}
             <span className="w-7 sm:w-9 sm:py-1 text-center border border-slate-700 text-slate-700 font-bold rounded-md">
@@ -186,38 +188,39 @@ function Pagination({ currentPage, setCurrentPage, npage, numbers }) {
             </span>
             {numbers.slice(-3).map((number, index) => (
               <li
+                onClick={() => changeCPage(number)}
                 key={index}
-                className={`w-7 sm:w-9 sm:py-1 text-center border border-slate-700 rounded-md ${
+                className={`w-7 cursor-pointer sm:w-9 sm:py-1 text-center border border-slate-700 rounded-md ${
                   currentPage === number
                     ? "bg-slate-600 text-white"
                     : "text-slate-700 "
                 }`}
               >
-                <a href="#" onClick={() => changeCPage(number)}>
-                  {number}
-                </a>
+                <a href="#">{number}</a>
               </li>
             ))}
           </>
         ) : (
           numbers.map((number, index) => (
             <li
+              onClick={() => changeCPage(number)}
               key={index}
-              className={`w-7 sm:w-9 sm:py-1 text-center border border-slate-700 rounded-md ${
+              className={`w-7 cursor-pointer sm:w-9 sm:py-1 text-center border border-slate-700 rounded-md ${
                 currentPage === number
                   ? "bg-slate-600 text-white"
                   : "text-slate-700 "
               }`}
             >
-              <a href="#" onClick={() => changeCPage(number)}>
-                {number}
-              </a>
+              <a href="#">{number}</a>
             </li>
           ))
         )}
         {/* Next Btn */}
-        <li className="sm:py-[3px] text-center border border-slate-700 text-slate-700 w-7 sm:w-9 rounded-md">
-          <a href="#" onClick={nextPage} className="text-xl">
+        <li
+          onClick={nextPage}
+          className="sm:py-[3px] cursor-pointer text-center border border-slate-700 text-slate-700 w-7 sm:w-9 rounded-md"
+        >
+          <a href="#" className="text-xl">
             &#x3e;
           </a>
         </li>
