@@ -7,7 +7,6 @@ import { PiHouseLineBold } from "react-icons/pi";
 import useFetch from "../hooks/useFetch";
 import { useQuery } from "../context/QueryContext";
 import Loader from "../Components/Loader";
-import Avator from "../assets/Images/avator.png";
 import { useNavigate } from "react-router-dom";
 import Header, { NumOfresult, Search, Favourite } from "../Components/Header";
 import { usePagination } from "../context/PaginationContext";
