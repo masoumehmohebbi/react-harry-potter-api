@@ -7,7 +7,6 @@ import { Character } from "../pages/CharacterList";
 import { useFavourite } from "../context/FavouritesContext";
 import useSetLocalStorage from "../hooks/useSetLocalStorage";
 import { useState } from "react";
-import { useAddedFav } from "../context/AddedFavContext";
 import { useSearch } from "../context/SearchContext";
 
 const options = [
@@ -96,7 +95,6 @@ export function Search() {
   );
 }
 export function Favourite() {
-  const { setIsAddToFavourite } = useAddedFav();
   const [isOpen, setIsOpen] = useState(false);
 
   const { Favourites, setFavourites } = useFavourite();
@@ -106,7 +104,6 @@ export function Favourite() {
   const handleFavRemove = (id) => {
     const filteredFev = Favourites.filter((item) => item.id !== id);
     setFavourites(filteredFev);
-    setIsAddToFavourite((is) => !is);
   };
 
   return (
