@@ -7,7 +7,7 @@ import { PiHouseLineBold } from "react-icons/pi";
 import useFetch from "../hooks/useFetch";
 import { useQuery } from "../context/QueryContext";
 import Loader from "../Components/Loader";
-
+import Avator from "../assets/Images/avator.png";
 import { useNavigate } from "react-router-dom";
 import Header, { NumOfresult, Search, Favourite } from "../Components/Header";
 import { usePagination } from "../context/PaginationContext";
@@ -86,7 +86,7 @@ export function Character({ data, children }) {
     <div className="grid bg-[#F3DEBA] shadow-lg rounded-md p-1 grid-rows-2 grid-cols-8 justify-items-center">
       <img
         className="rounded-lg object-cover col-span-2 row-span-2"
-        src={data.image ? data.image : "./src/assets/Images/avator.png"}
+        src={data.image ? data.image : Avator}
         alt=""
       />
 
